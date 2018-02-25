@@ -10,7 +10,16 @@ var markers = []
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
+  initalizeFocus();
 });
+
+/**
+ * Initialize focus
+ */
+initalizeFocus  = () => {
+  const filterOptionsTitle = document.querySelector('.filter-options h2');
+  filterOptionsTitle.focus();
+}
 
 /**
  * Fetch all neighborhoods and set their HTML.
@@ -58,7 +67,6 @@ fetchCuisines = () => {
  */
 fillCuisinesHTML = (cuisines = self.cuisines) => {
   const select = document.getElementById('cuisines-select');
-
   cuisines.forEach(cuisine => {
     const option = document.createElement('option');
     option.innerHTML = cuisine;
@@ -141,6 +149,10 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `${restaurant.name} restaurant photograph`;
+  image.setAttribute('srcset', 
+    `,${DBHelper.imageUrlForRestaurant(restaurant, '-400')} 400w` +
+    `,${DBHelper.imageUrlForRestaurant(restaurant, '-600')} 600w`);
   li.append(image);
 
   const name = document.createElement('h1');

@@ -1,6 +1,19 @@
 let restaurant;
 var map;
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  initalizeFocus();
+});
+
+/**
+ * Initialize focus
+ */
+initalizeFocus  = () => {
+  const filterOptionsTitle = document.querySelector('#restaurant-container h1');
+  filterOptionsTitle.focus();
+  filterOptionsTitle.setAttribute('tabIndex', '0');
+}
+
 /**
  * Initialize Google map, called from HTML.
  */
@@ -56,8 +69,12 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
+  image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `${restaurant.name} restaurant photograph`;
+  image.setAttribute('srcset', 
+    `,${DBHelper.imageUrlForRestaurant(restaurant, '-400')} 400w` +
+    `,${DBHelper.imageUrlForRestaurant(restaurant, '-600')} 600w`);
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -97,6 +114,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
+  title.setAttribute('tabIndex', '0');
   container.appendChild(title);
 
   if (!reviews) {

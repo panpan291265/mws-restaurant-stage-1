@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -28,13 +28,25 @@
     </section>
     <section>
       <div class="filter-options">
-        <h2>Filter Results</h2>
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
-          <option value="all">All Neighborhoods</option>
-        </select>
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
-          <option value="all">All Cuisines</option>
-        </select>
+        <h2 tabindex="-1">Filter Results</h2>
+        <div class="filter-select-controls-container">
+          <div class="select-container">
+            <div class="select-label-container">
+              <label for="neighborhoods-select">Neighborhood</label>
+            </div>
+            <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+              <option value="all">All Neighborhoods</option>
+            </select>
+          </div>
+          <div class="select-container">
+            <div class="select-label-container">
+              <label for="cuisines-select">Cuisine</label>
+            </div>
+            <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+              <option value="all">All Cuisines</option>
+            </select>
+          </div>
+        </div>
       </div>
       <ul id="restaurants-list"></ul>
     </section>
