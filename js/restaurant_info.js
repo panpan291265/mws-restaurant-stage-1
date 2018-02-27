@@ -1,7 +1,10 @@
 let restaurant;
 var map;
 
-document.addEventListener('DOMContentLoaded', (event) => {
+/**
+ * Initialize focus on window load.
+ */
+window.addEventListener('load', (event) => {
   initalizeFocus();
 });
 
@@ -66,6 +69,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   name.innerHTML = restaurant.name;
 
   const address = document.getElementById('restaurant-address');
+  address.setAttribute('tabIndex', '0');
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
@@ -92,6 +96,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
+  hours.setAttribute('tabindex', '0');
   for (let key in operatingHours) {
     const row = document.createElement('tr');
 
@@ -115,6 +120,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
   title.setAttribute('tabIndex', '0');
+  title.setAttribute('aria-label', `${self.restaurant.name} reviews`);
   container.appendChild(title);
 
   if (!reviews) {
@@ -135,21 +141,38 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
-  const name = document.createElement('p');
+
+  const reviewHeader = document.createElement('div');
+  reviewHeader.classList.add('review-header');
+  li.appendChild(reviewHeader);
+
+  const name = document.createElement('div');
   name.innerHTML = review.name;
-  li.appendChild(name);
+  name.classList.add('review-author');
+  reviewHeader.appendChild(name);
 
-  const date = document.createElement('p');
+  const date = document.createElement('div');
   date.innerHTML = review.date;
-  li.appendChild(date);
+  date.classList.add('review-date');
+  reviewHeader.appendChild(date);
 
-  const rating = document.createElement('p');
+  const reviewBody = document.createElement('div');
+  reviewBody.classList.add('review-body');
+  li.appendChild(reviewBody);
+
+  const ratingContainer = document.createElement('div');
+  ratingContainer.classList.add('review-rating-container');
+  reviewBody.appendChild(ratingContainer);
+
+  const rating = document.createElement('span');
   rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
+  rating.classList.add('review-rating');
+  ratingContainer.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
-  li.appendChild(comments);
+  rating.classList.add('review-comments');
+  reviewBody.appendChild(comments);
 
   return li;
 }

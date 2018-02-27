@@ -5,12 +5,18 @@ var map
 var markers = []
 
 /**
+ * Initialize focus on window load.
+ */
+window.addEventListener('load', (event) => {
+  initalizeFocus();
+});
+
+/**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
-  initalizeFocus();
 });
 
 /**
@@ -19,6 +25,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 initalizeFocus  = () => {
   const filterOptionsTitle = document.querySelector('.filter-options h2');
   filterOptionsTitle.focus();
+  filterOptionsTitle.setAttribute('tabindex', '0');
 }
 
 /**
@@ -157,19 +164,23 @@ createRestaurantHTML = (restaurant) => {
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
+  name.setAttribute('tabindex', '0');
   li.append(name);
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
+  neighborhood.setAttribute('tabindex', '0');
   li.append(neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
+  address.setAttribute('tabindex', '0');
   li.append(address);
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
+  more.setAttribute('aria-label', `${restaurant.name} more details`);
   li.append(more)
 
   return li
