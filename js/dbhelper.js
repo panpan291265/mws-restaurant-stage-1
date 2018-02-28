@@ -10,7 +10,8 @@ class DBHelper {
   static get DATABASE_URL() {
     // const port = 8000;
     // const dbUrl = `http://localhost:${port}/data/restaurants.json`;
-    const dbUrl = './data/restaurants.json';
+    const dbUrl = `${window.location}data/restaurants.json`;
+    console.log(dbUrl);
     return dbUrl;
   }
 
