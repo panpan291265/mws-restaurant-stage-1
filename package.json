@@ -11,10 +11,12 @@
   "devDependencies": {
     "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.2",
     "gulp-copy": "^1.1.0",
     "gulp-imagemin": "^4.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-responsive": "^2.9.0",
+    "gulp-uglify-es": "^1.0.1",
     "run-sequence": "^2.2.1"
   }
 }

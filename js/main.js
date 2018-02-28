@@ -153,6 +153,14 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
+  const itemContainer = document.createElement('div');
+  itemContainer.className = 'restaurant-list-item-container';
+  li.append(itemContainer);
+
+  const container1 = document.createElement('div');
+  container1.className = 'container1';
+  itemContainer.append(container1);
+
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
@@ -160,30 +168,41 @@ createRestaurantHTML = (restaurant) => {
   image.setAttribute('srcset', 
     `,${DBHelper.imageUrlForRestaurant(restaurant, '-400')} 400w` +
     `,${DBHelper.imageUrlForRestaurant(restaurant, '-600')} 600w`);
-  li.append(image);
+  container1.append(image);
 
+  const container2 = document.createElement('div');
+  container2.className = 'container2';
+  itemContainer.append(container2);
+  
   const name = document.createElement('h1');
+  name.className = 'restaurant-name';
   name.innerHTML = restaurant.name;
   name.setAttribute('tabindex', '0');
-  li.append(name);
+  container2.append(name);
 
   const neighborhood = document.createElement('p');
+  neighborhood.className = 'restaurant-neighborhood';
   neighborhood.innerHTML = restaurant.neighborhood;
   neighborhood.setAttribute('tabindex', '0');
-  li.append(neighborhood);
+  container2.append(neighborhood);
 
   const address = document.createElement('p');
+  address.className = 'restaurant-address';
   address.innerHTML = restaurant.address;
   address.setAttribute('tabindex', '0');
-  li.append(address);
+  container2.append(address);
 
+  const moreContainer = document.createElement('div');
+  moreContainer.className = 'restaurant-more-container';
+  container2.append(moreContainer);
   const more = document.createElement('a');
+  more.className = 'restaurant-more';
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
   more.setAttribute('aria-label', `${restaurant.name} more details`);
-  li.append(more)
+  moreContainer.append(more);
 
-  return li
+  return li;
 }
 
 /**
