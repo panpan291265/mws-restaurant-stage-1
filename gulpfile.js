@@ -31,9 +31,24 @@ gulp.task('copy:images:responsive', function () {
         .pipe(responsive({
             '*.jpg': [
                 {
+                    width: 200,
+                    quality: 50,
+                    rename: { suffix: '-200'}
+                },
+                {
+                    width: 300,
+                    quality: 50,
+                    rename: { suffix: '-300'}
+                },
+                {
                     width: 400,
                     quality: 50,
                     rename: { suffix: '-400'}
+                },
+                {
+                    width: 500,
+                    quality: 50,
+                    rename: { suffix: '-500'}
                 },
                 {
                     width: 600,
