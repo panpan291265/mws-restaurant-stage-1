@@ -1,8 +1,20 @@
 /**
  * Common database helper functions.
  */
-class DBHelper {
 
+class DBHelper {
+  /**
+   * Application Root URL.
+   */
+  static get ROOT_URL() {
+    let rootUrl = window.location.pathname;
+    const slashPos = rootUrl.lastIndexOf('/');
+    if (slashPos >= 0)
+      rootUrl = rootUrl.substring(0, slashPos);
+    console.log(rootUrl);
+    return rootUrl;
+  }
+  
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
@@ -10,7 +22,7 @@ class DBHelper {
   static get DATABASE_URL() {
     // const port = 8000;
     // const dbUrl = `http://localhost:${port}/data/restaurants.json`;
-    const dbUrl = `${window.location}data/restaurants.json`;
+    const dbUrl = `${DBHelper.ROOT_URL}data/restaurants.json`;
     console.log(dbUrl);
     return dbUrl;
   }
@@ -146,7 +158,7 @@ class DBHelper {
    * Restaurant page URL.
    */
   static urlForRestaurant(restaurant) {
-    return (`./restaurant.html?id=${restaurant.id}`);
+    return (`${DBHelper.ROOT_URL}restaurant.html?id=${restaurant.id}`);
   }
 
   /**
@@ -156,7 +168,7 @@ class DBHelper {
     let photoFileName = restaurant.photograph;
     if (suffix)
       photoFileName = photoFileName.replace(/.jpg$/, `${suffix}.jpg`);
-    return (`/img/${photoFileName}`);
+    return (`${DBHelper.ROOT_URL}img/${photoFileName}`);
   }
 
   /**
