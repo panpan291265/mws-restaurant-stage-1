@@ -8,10 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="img/folder-web-yellow.ico" type="image/ico" />
-  <!-- Normalize.css for better cross-browser consistency -->
+  <!--
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.min.css" />
-  <!-- Main CSS file -->
-  <link rel="stylesheet" href="css/styles.min.css" type="text/css">
+  <link rel="stylesheet" href="css/styles.min.css">
+  -->
+  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+  <link rel="stylesheet" href="css/styles.css">
   <title>Restaurant Info</title>
 </head>
 
@@ -73,11 +75,12 @@
   <!-- End footer -->
 
   <!-- Beginning scripts -->
-  <!-- Database helpers -->
+  <!--
   <script type="text/javascript" src="js/dbhelper.min.js"></script>
-  <!-- Main javascript file -->
   <script type="text/javascript" src="js/restaurant_info.min.js"></script>
-  <!-- Google Maps -->
+  -->
+  <script type="text/javascript" src="js/dbhelper.js"></script>
+  <script type="text/javascript" src="js/restaurant_info.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpJfz6j-5RdWrC8Llmv8IbTVwBRxwmi_A&libraries=places&callback=initMap"></script>
   <!-- End scripts -->
 

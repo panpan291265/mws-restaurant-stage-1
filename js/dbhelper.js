@@ -149,14 +149,14 @@ class DBHelper {
   /**
    * Restaurant image URL.
    */
-  static imageUrlForRestaurant(restaurant, suffix=null) {
+  static imageUrlForRestaurant(restaurant, suffix = null) {
     let photoFileName = restaurant.photograph;
     if (suffix)
       photoFileName = photoFileName.replace(/.jpg$/, `${suffix}.jpg`);
     return (`/img/${photoFileName}`);
   }
 
-/**
+  /**
    * Map marker for a restaurant.
    */
   static mapMarkerForRestaurant(restaurant, map) {

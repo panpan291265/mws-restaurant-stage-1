@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 /**
  * Initialize focus
  */
-initalizeFocus  = () => {
+initalizeFocus = () => {
   const filterOptionsTitle = document.querySelector('.filter-options h2');
   filterOptionsTitle.focus();
   filterOptionsTitle.setAttribute('tabindex', '0');
@@ -165,7 +165,7 @@ createRestaurantHTML = (restaurant) => {
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   image.alt = `${restaurant.name} restaurant photograph`;
-  image.setAttribute('srcset', 
+  image.setAttribute('srcset',
     `,${DBHelper.imageUrlForRestaurant(restaurant, '-400')} 400w` +
     `,${DBHelper.imageUrlForRestaurant(restaurant, '-600')} 600w`);
   container1.append(image);
@@ -173,7 +173,7 @@ createRestaurantHTML = (restaurant) => {
   const container2 = document.createElement('div');
   container2.className = 'container2';
   itemContainer.append(container2);
-  
+
   const name = document.createElement('h1');
   name.className = 'restaurant-name';
   name.innerHTML = restaurant.name;

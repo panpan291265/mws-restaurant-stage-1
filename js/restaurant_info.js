@@ -11,7 +11,7 @@ window.addEventListener('load', (event) => {
 /**
  * Initialize focus
  */
-initalizeFocus  = () => {
+initalizeFocus = () => {
   const filterOptionsTitle = document.querySelector('#restaurant-container h1');
   filterOptionsTitle.focus();
   filterOptionsTitle.setAttribute('tabIndex', '0');
@@ -25,7 +25,8 @@ window.initMap = () => {
     if (error) { // Got an error!
       console.error(error);
     } else {
-      self.map = new google.maps.Map(document.getElementById('map'), {
+      const mapElement = document.getElementById('map');
+      self.map = new google.maps.Map(mapElement, {
         zoom: 16,
         center: restaurant.latlng,
         scrollwheel: false
@@ -76,11 +77,12 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   image.alt = `${restaurant.name} restaurant photograph`;
-  image.setAttribute('srcset', 
+  image.setAttribute('srcset',
     `,${DBHelper.imageUrlForRestaurant(restaurant, '-400')} 400w` +
     `,${DBHelper.imageUrlForRestaurant(restaurant, '-600')} 600w`);
 
   const cuisine = document.getElementById('restaurant-cuisine');
+  cuisine.setAttribute('tabIndex', '0');
   cuisine.innerHTML = restaurant.cuisine_type;
 
   // fill operating hours

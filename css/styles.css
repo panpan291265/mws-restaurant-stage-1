@@ -211,7 +211,7 @@ nav h1 a {
   font-size: 1.0rem;
   background-color: transparent;
   color: #ddd;
-  padding-bottom: 6px;  
+  padding-bottom: 6px;
 }
 
 .filter-options select {
@@ -238,7 +238,6 @@ nav h1 a {
   .filter-select-controls-container {
     flex-direction: row;
   }
-
   .filter-options select {
     margin: 10px;
   }
@@ -600,20 +599,16 @@ nav h1 a {
     font-size: 1.3rem;
     letter-spacing: 3px;
   }
-
   #breadcrumb li {
     font-size: 0.9rem;
   }
-
   #restaurant-hours td {
     padding-left: 12px;
   }
-
   .review-author {
     width: 50%;
     text-align: left;
   }
-  
   .review-date {
     width: 50%;
     text-align: right;
@@ -625,11 +620,9 @@ nav h1 a {
     max-width: 500px;
     width: 500px;
   }
-
   .restaurant-list-item-container .container1 {
     width: 40%;
   }
-  
   .restaurant-list-item-container .container2 {
     width: 60%;
   }
@@ -640,28 +633,22 @@ nav h1 a {
     font-size: 1.5rem;
     letter-spacing: 5px;
   }
-
   #breadcrumb li {
     font-size: 1.0rem;
   }
-
   #restaurant-name {
     width: 100%;
   }
-
   #restaurant-img {
     width: 40%;
   }
-
   #restaurant-container-1 {
     width: 60%;
   }
-
   #restaurant-cuisine {
     font-size: 0.9rem;
     padding: 4px 0;
   }
-
   #restaurant-hours td {
     font-size: 0.9rem;
   }
@@ -672,7 +659,6 @@ nav h1 a {
     font-size: 1.0rem;
     padding: 6px 0;
   }
-
   #restaurant-hours td {
     font-size: 0.9rem;
   }
@@ -696,16 +682,13 @@ nav h1 a {
   #restaurant-name {
     font-size: 1.7rem;
   }
-
   #restaurant-cuisine,
   #restaurant-address {
     font-size: 1.2rem;
   }
-
   #restaurant-hours {
     padding-top: 12px;
   }
-
   #restaurant-hours td {
     font-size: 1.2rem;
     padding: 1px 16px;
@@ -716,29 +699,23 @@ nav h1 a {
   #restaurant-name {
     font-size: 1.8rem;
   }
-
   #restaurant-img {
     width: 47%;
   }
-
   #restaurant-container-1 {
     width: 100%;
     order: 3;
   }
-
   #restaurant-container-2 {
     width: 53%;
     order: 2;
   }
-
   #restaurant-address {
     margin-top: 0;
   }
-
   #restaurant-hours {
     padding-top: 12px;
   }
-
   #restaurant-hours td {
     padding: 2px 32px;
   }
@@ -749,7 +726,6 @@ nav h1 a {
     font-size: 2.0rem;
     margin: 24px 0;
   }
-
   .inside #map {
     height: 320px;
   }
@@ -759,7 +735,6 @@ nav h1 a {
   #restaurant-hours td {
     font-size: 1.2rem;
   }
-  
   .inside #map {
     height: 350px;
   }
@@ -769,11 +744,9 @@ nav h1 a {
   #restaurant-img {
     width: 44%;
   }
-
   #restaurant-container-2 {
     width: 56%;
   }
-
   .inside #map {
     height: 380px;
   }
@@ -783,11 +756,9 @@ nav h1 a {
   #restaurant-img {
     width: 42%;
   }
-
   #restaurant-container-2 {
     width: 58%;
   }
-
   .inside #map {
     height: 390px;
   }
@@ -797,11 +768,9 @@ nav h1 a {
   #restaurant-img {
     width: 40%;
   }
-
   #restaurant-container-2 {
     width: 60%;
   }
-
   .inside #map {
     height: 400px;
   }
@@ -811,11 +780,9 @@ nav h1 a {
   #restaurant-img {
     width: 38%;
   }
-
   #restaurant-container-2 {
     width: 62%;
   }
-
   .inside #map {
     height: 400px;
   }
