@@ -11,7 +11,12 @@ class DBHelper {
     const slashPos = rootUrl.lastIndexOf('/');
     if (slashPos >= 0)
       rootUrl = rootUrl.substring(0, slashPos);
-    console.log(rootUrl);
+    if (!rootUrl) {
+      rootUrl = '/';
+    } else {
+      if (!rootUrl.endsWith('/'))
+        rootUrl += '/';
+    }
     return rootUrl;
   }
   
@@ -23,7 +28,6 @@ class DBHelper {
     // const port = 8000;
     // const dbUrl = `http://localhost:${port}/data/restaurants.json`;
     const dbUrl = `${DBHelper.ROOT_URL}data/restaurants.json`;
-    console.log(dbUrl);
     return dbUrl;
   }
 
