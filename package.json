@@ -6,7 +6,8 @@
     "url": "https://github.com/panpan291265/mws-restaurant-stage-1.git"
   },
   "scripts": {
-    "build": "gulp build"
+    "build": "gulp build",
+    "serve": "http-server ./ -p 8000"
   },
   "devDependencies": {
     "del": "^3.0.0",

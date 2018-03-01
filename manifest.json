@@ -1,4 +1,7 @@
 {
     "short_name": "RestoRev",
-    "name": "Restaurant Reviews"
+    "name": "Restaurant Reviews",
+    "start_url": "/",
+    "display": "fullscreen",
+    "icon": "/img/folder-web-yellow.ico"
 }

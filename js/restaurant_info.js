@@ -5,6 +5,15 @@ var map;
  * Initialize focus on window load.
  */
 window.addEventListener('load', (event) => {
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('serviceWorker.js')
+      .then(() => {
+        // console.log('Service worker registered successfully.');
+      })
+      .catch(err => {
+        console.error('Error registering service worker:', err);
+      })
+  }
   initalizeFocus();
 });
 
@@ -83,14 +92,14 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     `,${DBHelper.imageUrlForRestaurant(restaurant, '-400')} 400w` +
     `,${DBHelper.imageUrlForRestaurant(restaurant, '-500')} 500w` +
     `,${DBHelper.imageUrlForRestaurant(restaurant, '-600')} 600w`);
-  image.setAttribute('sizes', 
-      '(min-width: 620px) 40vw' +
-      ',(min-width: 1024px) 47vw' +
-      ',(min-width: 1300px) 44vw' +
-      ',(min-width: 1400px) 42vw' +
-      ',(min-width: 1500px) 40vw' +
-      ',(min-width: 1600px) 38vw' +
-      ',100vw');
+  image.setAttribute('sizes',
+    '(min-width: 620px) 40vw' +
+    ',(min-width: 1024px) 47vw' +
+    ',(min-width: 1300px) 44vw' +
+    ',(min-width: 1400px) 42vw' +
+    ',(min-width: 1500px) 40vw' +
+    ',(min-width: 1600px) 38vw' +
+    ',100vw');
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.setAttribute('tabIndex', '0');

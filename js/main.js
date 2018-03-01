@@ -8,6 +8,16 @@ var markers = []
  * Initialize focus on window load.
  */
 window.addEventListener('load', (event) => {
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('serviceWorker.js')
+      .then(() => {
+        // console.log('Service worker registered successfully.');
+      })
+      .catch(err => {
+        console.error('Error registering service worker:', err);
+      })
+  }
+
   initalizeFocus();
 });
 
