@@ -9,21 +9,21 @@ self.addEventListener('install', event => {
         caches.open(cacheName)
             .then(function (cache) {
                 let requests = [
-                    '/index.html', '/data/restaurants.json',
-                    '/img/folder-web-yellow.ico',
-                    '/css/styles.css', '/css/styles.min.css',
-                    '/js/urlhelper.js', '/js/urlhelper.min.js',
-                    '/js/dbhelper.js', '/js/dbhelper.min.js',
-                    '/js/main.js', '/js/main.min.js',
-                    '/js/restaurant_info.js', '/js/restaurant_info.min.js'
+                    'index.html', 'data/restaurants.json',
+                    'img/folder-web-yellow.ico',
+                    'css/styles.css', 'css/styles.min.css',
+                    'js/urlhelper.js', 'js/urlhelper.min.js',
+                    'js/dbhelper.js', 'js/dbhelper.min.js',
+                    'js/main.js', 'js/main.min.js',
+                    'js/restaurant_info.js', 'js/restaurant_info.min.js'
                 ];
                 /* Uncomment to cache all restaurant site urls
                 const imageSuffixes = ['', '-200', '-300', '-400', '-500', '-600'];
                 for (let i = 1; i <= 10; i++) {
                     imageSuffixes.forEach(imgSuffix => { 
-                        requests.push(`/img/${i}${imgSuffix}.jpg`)
+                        requests.push(`img/${i}${imgSuffix}.jpg`)
                     });
-                    requests.push(`/restaurant.html?id=${i}`);
+                    requests.push(`restaurant.html?id=${i}`);
                 }
                 */
                 return cache.addAll(requests);
@@ -55,7 +55,7 @@ self.addEventListener('fetch', event => {
             .then(cache => {
                 let matchPromise = null;
                 if (!requestUrl.pathname || requestUrl.pathname === '/')
-                    matchPromise = cache.match('/index.html');
+                    matchPromise = cache.match('index.html');
                 else
                     matchPromise = cache.match(event.request);
                 matchPromise
