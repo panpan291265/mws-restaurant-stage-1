@@ -52,9 +52,9 @@ self.addEventListener('fetch', event => {
         caches.open(cacheName)
             .then(cache => {
                 let cacheKey = event.request;
-                if (!requestUrl.pathname || requestUrl.pathname === '/') {
+                if (!requestUrl.pathname) {
                     cacheKey = 'index.html';
-                } else if (requestUrl.pathname.startsWith('img/')) {
+                } else if (requestUrl.pathname.endsWith('.jpg')) {
                     cacheKey = requestUrl.pathname.replace(/-\d+\.jpg$/, '.jpg');
                 }
                 cache.match(cacheKey)
