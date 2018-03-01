@@ -17,15 +17,13 @@ self.addEventListener('install', event => {
                     'js/main.js', 'js/main.min.js',
                     'js/restaurant_info.js', 'js/restaurant_info.min.js'
                 ];
-                /* Uncomment to cache all restaurant site urls
-                const imageSuffixes = ['', '-200', '-300', '-400', '-500', '-600'];
                 for (let i = 1; i <= 10; i++) {
-                    imageSuffixes.forEach(imgSuffix => { 
-                        requests.push(`img/${i}${imgSuffix}.jpg`)
-                    });
+                    // Cache all images (large size only)
+                    requests.push(`img/${i}.jpg`);
+                    
+                    // Comment the following line  in order to prevent caching of all restaurants sites
                     requests.push(`restaurant.html?id=${i}`);
                 }
-                */
                 return cache.addAll(requests);
             })
     );
@@ -53,25 +51,23 @@ self.addEventListener('fetch', event => {
     return new Promise((resolve, reject) => {
         caches.open(cacheName)
             .then(cache => {
-                let matchPromise = null;
-                if (!requestUrl.pathname || requestUrl.pathname === '/')
-                    matchPromise = cache.match('index.html');
-                else
-                    matchPromise = cache.match(event.request);
-                matchPromise
+                let cacheKey = event.request;
+                if (!requestUrl.pathname || requestUrl.pathname === '/') {
+                    cacheKey = 'index.html';
+                } else if (requestUrl.pathname.startsWith('img/')) {
+                    cacheKey = requestUrl.pathname.replace(/-\d+\.jpg$/, '.jpg');
+                }
+                cache.match(cacheKey)
                     .then(cachedResponse => {
                         if (cachedResponse)
                             return resolve(cachedResponse);
                         fetch(event.request)
                             .then(networkResponse => {
-                                cache.put(event.request, networkResponse.clone());
+                                cache.put(cacheKey, networkResponse.clone());
                                 return resolve(networkResponse);
-                            })
-                            .catch(err => console.error(err));
-                    })
-                    .catch(err => console.error(err));
-            })
-            .catch(err => console.error(err));
+                            });
+                    });
+            });
     });
 });
 
