@@ -17,15 +17,17 @@ self.addEventListener('install', event => {
                     'js/main.js', 'js/main.min.js',
                     'js/restaurant_info.js', 'js/restaurant_info.min.js'
                 ];
+                const imgSuffs = ['', '-200', '-300', '-400', '-500', '-600'];
                 for (let i = 1; i <= 10; i++) {
-                    // Cache all images (large size only)
-                    requests.push(`img/${i}.jpg`);
+                    // Cache all images preactivelly
+                    imgSuffs.forEach(imgSuffix => requests.push(`img/${i}${imgSuffix}.jpg`));
                     
                     // Comment the following line  in order to prevent caching of all restaurants sites
                     requests.push(`restaurant.html?id=${i}`);
                 }
                 return cache.addAll(requests);
             })
+            .catch(err => console.error(err))
     );
 });
 
@@ -41,6 +43,7 @@ self.addEventListener('activate', event => {
                     .map(cn => caches.delete(cn))
                 );
             })
+            .catch(err => console.error(err))
     );
 });
 
@@ -65,9 +68,12 @@ self.addEventListener('fetch', event => {
                             .then(networkResponse => {
                                 cache.put(cacheKey, networkResponse.clone());
                                 return resolve(networkResponse);
-                            });
-                    });
-            });
+                            })
+                            .catch(err => console.error(err));
+                    })
+                    .catch(err => console.error(err));
+            })
+            .catch(err => console.error(err));
     });
 });
 
