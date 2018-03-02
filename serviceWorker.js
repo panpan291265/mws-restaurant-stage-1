@@ -51,6 +51,12 @@ self.addEventListener('fetch', event => {
     // console.log('Service worker fetch event handler called :', event);
 
     const requestUrl = new URL(event.request.url);
+
+    // Comment the following block in order to cache external origin requests
+    if (requestUrl.origin !== location.origin) {
+        return fetch(event.request);
+    }
+    
     return new Promise((resolve, reject) => {
         caches.open(cacheName)
             .then(cache => {
