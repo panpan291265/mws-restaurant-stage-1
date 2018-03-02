@@ -74,14 +74,14 @@ self.addEventListener('fetch', event => {
             .then(cache => {
                 // let cacheKey = event.request;
                 let cacheKey = event.request.url;
-                if (!cacheKey) {
+                if (!cacheKey || cacheKey === '/') {
                     cacheKey = 'index.html';
                 } else if (cacheKey.includes('restaurant.html?id=')) {
                     cacheKey = cacheKey.replace(/restaurant\.html\?id=/, 'restaurant.html-id-');
-                }
+                } 
                 /* else if (cacheKey.endsWith('.jpg')) {
-                                   cacheKey = cacheKey.replace(/-\d+\.jpg$/, '.jpg');
-                               } */
+                    cacheKey = cacheKey.replace(/-\d+\.jpg$/, '.jpg');
+                } */
                 cache.match(cacheKey)
                     .then(cachedResponse => {
                         if (cachedResponse)
