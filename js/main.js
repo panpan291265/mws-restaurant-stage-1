@@ -154,7 +154,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     ul.append(createRestaurantHTML(restaurant));
   });
-  addMarkersToMap();
+  resumeMap();
 }
 
 /**
@@ -218,6 +218,24 @@ createRestaurantHTML = (restaurant) => {
 
   return li;
 }
+
+/**
+ * Resume map.
+ */
+resumeMap = () => {
+  /*
+  const mapContainer = document.querySelector('#map-container');
+  const mapElement = mapContainer.querySelector('#map-container #map');
+  mapContainer.style.height = 0;
+  mapElement.style.visibility = 'hidden';
+  google.maps.event.addListener(self.map, 'tilesloaded', event => {
+    mapContainer.style.height = 'auto';
+    mapElement.style.visibility = 'visible';
+    addMarkersToMap();
+  });
+  */
+  addMarkersToMap();
+};
 
 /**
  * Add markers for current restaurants to the map.

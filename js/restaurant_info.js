@@ -41,10 +41,30 @@ window.initMap = () => {
         scrollwheel: false
       });
       fillBreadcrumb();
-      DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+      resumeMap();
     }
   });
 }
+
+/**
+ * Resume map.
+ */
+resumeMap = () => {
+  /*
+  const mapContainer = document.querySelector('.inside #map-container');
+  const mapElement = mapContainer.querySelector('.inside #map-container #map');
+  mapContainer.style.height = 0;
+  mapElement.style.visibility = 'hidden';
+  google.maps.event.addListener(self.map, 'tilesloaded', event => {
+    mapContainer.style.height = 'auto';
+    mapElement.style.visibility = 'visible';
+    DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+  });
+  */
+  DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+};
+
+
 
 /**
  * Get current restaurant from page URL.
