@@ -8,8 +8,11 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(cacheName)
             .then(function (cache) {
+                
+                // Cache main application resources
                 let requests = [
-                    'index.html', 'data/restaurants.json',
+                    'index.html', 'restaurant.html',
+                    'data/restaurants.json',
                     'img/folder-web-yellow.ico',
                     'css/styles.css', 'css/styles.min.css',
                     'js/urlhelper.js', 'js/urlhelper.min.js',
@@ -17,14 +20,13 @@ self.addEventListener('install', event => {
                     'js/main.js', 'js/main.min.js',
                     'js/restaurant_info.js', 'js/restaurant_info.min.js'
                 ];
+                
+                // Cache all images preactivelly
                 const imgSuffs = ['', '-200', '-300', '-400', '-500', '-600'];
                 for (let i = 1; i <= 10; i++) {
-                    // Cache all images preactivelly
                     imgSuffs.forEach(imgSuffix => requests.push(`img/${i}${imgSuffix}.jpg`));
-                    
-                    // Comment the following line  in order to prevent caching of all restaurants sites
-                    requests.push(`restaurant.html?id=${i}`);
                 }
+
                 return cache.addAll(requests);
             })
             .catch(err => console.error(err))
