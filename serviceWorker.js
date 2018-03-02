@@ -10,7 +10,7 @@ self.addEventListener('install', event => {
         .then(function (cache) {
             // Cache main application resources
             let requests = [
-                'index.html', 'restaurant.html',
+                '/', 'index.html', 'restaurant.html',
                 'data/restaurants.json',
                 'img/folder-web-yellow.ico',
                 'css/styles.css', 'css/styles.min.css',
