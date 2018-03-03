@@ -133,7 +133,7 @@ gulp.task('minify:serviceWorker', function () {
 		.pipe(rename(function (path) {
 			path.extname = '.min.js';
 		}))
-		.pipe(gulp.dest(pathJs));
+		.pipe(gulp.dest('./'));
 });
 
 gulp.task('build:serviceWorker', function () {
