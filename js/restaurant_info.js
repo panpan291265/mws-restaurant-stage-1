@@ -6,7 +6,7 @@ var map;
  */
 window.addEventListener('load', (event) => {
   if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('serviceWorker.js')
+    navigator.serviceWorker.register('serviceWorker.min.js')
       .then(() => {
         // console.log('Service worker registered successfully.');
       })

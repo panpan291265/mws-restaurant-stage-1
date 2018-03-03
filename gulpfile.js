@@ -32,32 +32,32 @@ gulp.task('copy:images:responsive', function () {
             '*.jpg': [
                 {
                     width: 200,
-                    quality: 50,
+                    quality: 33,
                     rename: { suffix: '-200'}
                 },
                 {
                     width: 300,
-                    quality: 50,
+                    quality: 33,
                     rename: { suffix: '-300'}
                 },
                 {
                     width: 400,
-                    quality: 50,
+                    quality: 33,
                     rename: { suffix: '-400'}
                 },
                 {
                     width: 500,
-                    quality: 50,
+                    quality: 33,
                     rename: { suffix: '-500'}
                 },
                 {
                     width: 600,
-                    quality: 50,
+                    quality: 33,
                     rename: { suffix: '-600'}
                 },
                 {
                     width: 800,
-                    quality: 50,
+                    quality: 33,
                     rename: { suffix: ''}
                 }
             ]
@@ -121,13 +121,37 @@ gulp.task('build:js', function () {
 });
 
 
+/* serviceWorker */
+
+gulp.task('clean:serviceWorker', function () {
+	return del('serviceWorker.min.js');
+});
+
+gulp.task('minify:serviceWorker', function () {
+	return gulp.src('serviceWorker.js')
+        .pipe(minifyJs())
+		.pipe(rename(function (path) {
+			path.extname = '.min.js';
+		}))
+		.pipe(gulp.dest(pathJs));
+});
+
+gulp.task('build:serviceWorker', function () {
+	return runSequence(
+        'clean:serviceWorker',
+        'minify:serviceWorker'
+	);
+});
+
+
 /* main build tasks */
 
 gulp.task('clean', function () {
 	return runSequence(
         'clean:images',
         'clean:css',
-        'clean:js'
+        'clean:js',
+        'clean:serviceWorker'
 	);
 });
 
@@ -135,6 +159,7 @@ gulp.task('build', function () {
 	return runSequence(
         'build:images',
         'build:css',
-        'build:js'
+        'build:js',
+        'build:serviceWorker'
 	);
 });
