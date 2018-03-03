@@ -95,7 +95,7 @@ self.addEventListener('fetch', event => {
                             return resolve(cachedResponse);
                         fetch(event.request)
                             .then(networkResponse => {
-                                console.log(`Adding new cache item: '${cacheKey}'`);
+                                // console.log(`Adding new cache item: '${cacheKey}'`);
                                 cache.put(cacheKey, networkResponse.clone());
                                 return resolve(networkResponse);
                             })
