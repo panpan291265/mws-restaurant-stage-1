@@ -26,7 +26,7 @@ self.addEventListener('install', event => {
                 imgSuffs.forEach(imgSuffix => requests.push(`img/${i}${imgSuffix}.jpg`));
             }
 
-            cache.addAll(requests)
+            return cache.addAll(requests)
                 .then(() => {
                     // Cache all restaurant sites preactivelly
                     for (let i = 1; i <= 10; i++) {
