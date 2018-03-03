@@ -31,7 +31,7 @@ self.addEventListener('install', event => {
                         // Cache all restaurant sites preactivelly
                         const requestPromises = [];
                         for (let i = 1; i <= 10; i++) {
-                            const restaurantUrl = `restaurant.html?id=${i}`;
+                            const restaurantUrl = `${location.pathname}restaurant.html?id=${i}`;
                             const cacheKey = `restaurant.html-id-${i}`;
                             requestPromises.push(
                                 fetch(restaurantUrl).then(response => {
