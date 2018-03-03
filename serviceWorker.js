@@ -20,13 +20,14 @@ self.addEventListener('install', event => {
                     'js/restaurant_info.js', 'js/restaurant_info.min.js'
                 ];
 
-                // Cache images preactivelly
+                // Cache images and restaurant site preactivelly
                 const imgSuffs = ['', '-200', '-300', '-400', '-500', '-600'];
                 for (let i = 1; i <= 10; i++) {
                     imgSuffs.forEach(imgSuffix => requests.push(`img/${i}${imgSuffix}.jpg`));
+                    requests.push(`restaurant.html?id=${i}`);
                 }
-
-                return cache.addAll(requests)
+                return cache.addAll(requests);
+                /*
                     .then(() => {
                         // Cache all restaurant sites preactivelly
                         const requestPromises = [];
@@ -41,6 +42,7 @@ self.addEventListener('install', event => {
                         }
                         return Promise.all(requestPromises);
                     });
+                */
             })
             .catch(err => console.error(err))
     );
@@ -69,9 +71,11 @@ self.addEventListener('fetch', event => {
 
     // Comment or uncomment the following block in order to 
     // include or exclude caching of external origin requests
+    /*
     if (requestUrl.origin !== location.origin) {
         return fetch(event.request);
     }
+    */
 
     return new Promise((resolve, reject) => {
         caches.open(cacheName)
@@ -80,10 +84,9 @@ self.addEventListener('fetch', event => {
                 let cacheKey = event.request.url;
                 if (!cacheKey || cacheKey === '/') {
                     cacheKey = 'index.html';
-                } else if (cacheKey.includes('restaurant.html?id=')) {
+                } /* else if (cacheKey.includes('restaurant.html?id=')) {
                     cacheKey = cacheKey.replace(/restaurant\.html\?id=/, 'restaurant.html-id-');
-                } 
-                /* else if (cacheKey.endsWith('.jpg')) {
+                } else if (cacheKey.endsWith('.jpg')) {
                     cacheKey = cacheKey.replace(/-\d+\.jpg$/, '.jpg');
                 } */
                 cache.match(cacheKey)
@@ -92,7 +95,7 @@ self.addEventListener('fetch', event => {
                             return resolve(cachedResponse);
                         fetch(event.request)
                             .then(networkResponse => {
-                                // console.log(`Adding new cache item: '${cacheKey}'`);
+                                console.log(`Adding new cache item: '${cacheKey}'`);
                                 cache.put(cacheKey, networkResponse.clone());
                                 return resolve(networkResponse);
                             })
