@@ -7,38 +7,42 @@ self.addEventListener('install', event => {
 
     event.waitUntil(
         caches.open(cacheName)
-        .then(function (cache) {
-            // Cache main application resources
-            let requests = [
-                '/', 'index.html', 'restaurant.html',
-                'data/restaurants.json',
-                'img/folder-web-yellow.ico',
-                'css/styles.css', 'css/styles.min.css',
-                'js/urlhelper.js', 'js/urlhelper.min.js',
-                'js/dbhelper.js', 'js/dbhelper.min.js',
-                'js/main.js', 'js/main.min.js',
-                'js/restaurant_info.js', 'js/restaurant_info.min.js'
-            ];
+            .then(function (cache) {
+                // Cache main application resources
+                let requests = [
+                    '/', 'index.html', 'restaurant.html',
+                    'data/restaurants.json',
+                    'img/folder-web-yellow.ico',
+                    'css/styles.css', 'css/styles.min.css',
+                    'js/urlhelper.js', 'js/urlhelper.min.js',
+                    'js/dbhelper.js', 'js/dbhelper.min.js',
+                    'js/main.js', 'js/main.min.js',
+                    'js/restaurant_info.js', 'js/restaurant_info.min.js'
+                ];
 
-            // Cache images preactivelly
-            const imgSuffs = ['', '-200', '-300', '-400', '-500', '-600'];
-            for (let i = 1; i <= 10; i++) {
-                imgSuffs.forEach(imgSuffix => requests.push(`img/${i}${imgSuffix}.jpg`));
-            }
+                // Cache images preactivelly
+                const imgSuffs = ['', '-200', '-300', '-400', '-500', '-600'];
+                for (let i = 1; i <= 10; i++) {
+                    imgSuffs.forEach(imgSuffix => requests.push(`img/${i}${imgSuffix}.jpg`));
+                }
 
-            return cache.addAll(requests)
-                .then(() => {
-                    // Cache all restaurant sites preactivelly
-                    for (let i = 1; i <= 10; i++) {
-                        const restaurantUrl = `restaurant.html?id=${i}`;
-                        const cacheKey = `restaurant.html-id-${i}`;
-                        fetch(restaurantUrl).then(response => {
-                            cache.put(cacheKey, response);
-                        });
-                    }
-                });
-        })
-        .catch(err => console.error(err))
+                return cache.addAll(requests)
+                    .then(() => {
+                        // Cache all restaurant sites preactivelly
+                        const requestPromises = [];
+                        for (let i = 1; i <= 10; i++) {
+                            const restaurantUrl = `restaurant.html?id=${i}`;
+                            const cacheKey = `restaurant.html-id-${i}`;
+                            requestPromises.push(
+                                fetch(restaurantUrl).then(response => {
+                                    cache.put(cacheKey, response);
+                                })
+                            );
+                        }
+                        return Promise.all(requestPromises);
+                    });
+            })
+            .catch(err => console.error(err))
     );
 });
 
