@@ -20,13 +20,34 @@ gulp.task('clean:images', function () {
 	return del(`${pathDestImages}/**/*`);
 });
 
-gulp.task('copy:images:fixed', function () {
-	return gulp.src(`${pathSourceImages}/*.ico`)
+gulp.task('copy:images:app', function () {
+    return gulp.src([
+            `${pathSourceImages}/restaurant.png`
+        ])
+        .pipe(responsive({
+            '*.png': [
+                {
+                    width: 128,
+                    quality: 33,
+                    rename: { suffix: '-128'}
+                },
+                {
+                    width: 256,
+                    quality: 33,
+                    rename: { suffix: '-256'}
+                },
+                {
+                    width: 512,
+                    quality: 33,
+                    rename: { suffix: ''}
+                }
+            ]
+        }))
         .pipe(imageMin({ verbose: false }))
 		.pipe(gulp.dest(`${pathDestImages}`));
 });
 
-gulp.task('copy:images:responsive', function () {
+gulp.task('copy:images:data', function () {
 	return gulp.src(`${pathSourceImages}/**/*.jpg`)
         .pipe(responsive({
             '*.jpg': [
@@ -69,8 +90,8 @@ gulp.task('copy:images:responsive', function () {
 gulp.task('build:images', function () {
 	return runSequence(
         'clean:images',
-        'copy:images:fixed',
-        'copy:images:responsive'
+        'copy:images:app',
+        'copy:images:data'
 	);
 });
 

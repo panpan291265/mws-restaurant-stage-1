@@ -12,7 +12,9 @@ self.addEventListener('install', event => {
                 let requests = [
                     'index.html', 'restaurant.html',
                     'data/restaurants.json',
-                    'img/folder-web-yellow.ico',
+                    'img/restaurant-128.png',
+                    'img/restaurant-256.png',
+                    'img/restaurant.png',
                     'css/styles.css', 'css/styles.min.css',
                     'js/urlhelper.js', 'js/urlhelper.min.js',
                     'js/dbhelper.js', 'js/dbhelper.min.js',
@@ -20,29 +22,15 @@ self.addEventListener('install', event => {
                     'js/restaurant_info.js', 'js/restaurant_info.min.js'
                 ];
 
-                // Cache images and restaurant site preactivelly
-                const imgSuffs = ['', '-200', '-300', '-400', '-500', '-600'];
+                const dataImgSuffs = ['', '-200', '-300', '-400', '-500', '-600'];
                 for (let i = 1; i <= 10; i++) {
-                    imgSuffs.forEach(imgSuffix => requests.push(`img/${i}${imgSuffix}.jpg`));
-                    requests.push(`restaurant.html?id=${i}`);
+                    // Cache data images preactivelly
+                    dataImgSuffs.forEach(imgSuffix => requests.push(`img/${i}${imgSuffix}.jpg`));
+
+                    // Cache restaurant sites preactivelly
+                    // requests.push(`restaurant.html?id=${i}`);
                 }
-                return cache.addAll(requests);
-                /*
-                    .then(() => {
-                        // Cache all restaurant sites preactivelly
-                        const requestPromises = [];
-                        for (let i = 1; i <= 10; i++) {
-                            const restaurantUrl = `${location.pathname}restaurant.html?id=${i}`;
-                            const cacheKey = `restaurant.html-id-${i}`;
-                            requestPromises.push(
-                                fetch(restaurantUrl).then(response => {
-                                    cache.put(cacheKey, response);
-                                })
-                            );
-                        }
-                        return Promise.all(requestPromises);
-                    });
-                */
+                return cache.addAll(requests).then(() => self.skipWaiting());
             })
             .catch(err => console.error(err))
     );
@@ -50,61 +38,29 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
     // console.log('Service worker activate event handler called :', event);
-
-    event.waitUntil(
-        caches.keys()
-        .then(cacheNames => {
-            return Promise.all(
-                cacheNames
-                .filter(cn => cn.startsWith(cachePrefix) && cn !== cacheName)
-                .map(cn => caches.delete(cn))
-            );
-        })
-        .catch(err => console.error(err))
-    );
+    // event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', event => {
     // console.log('Service worker fetch event handler called :', event);
 
-    const requestUrl = new URL(event.request.url);
-
-    // Comment or uncomment the following block in order to 
-    // include or exclude caching of external origin requests
-    /*
-    if (requestUrl.origin !== location.origin) {
-        return fetch(event.request);
-    }
-    */
-
-    return new Promise((resolve, reject) => {
-        caches.open(cacheName)
-            .then(cache => {
-                // let cacheKey = event.request;
-                let cacheKey = event.request.url;
-                if (!cacheKey || cacheKey === '/') {
-                    cacheKey = 'index.html';
-                } /* else if (cacheKey.includes('restaurant.html?id=')) {
-                    cacheKey = cacheKey.replace(/restaurant\.html\?id=/, 'restaurant.html-id-');
-                } else if (cacheKey.endsWith('.jpg')) {
-                    cacheKey = cacheKey.replace(/-\d+\.jpg$/, '.jpg');
-                } */
-                cache.match(cacheKey)
-                    .then(cachedResponse => {
-                        if (cachedResponse)
-                            return resolve(cachedResponse);
-                        fetch(event.request)
-                            .then(networkResponse => {
-                                // console.log(`Adding new cache item: '${cacheKey}'`);
-                                cache.put(cacheKey, networkResponse.clone());
-                                return resolve(networkResponse);
-                            })
-                            .catch(err => console.error(err));
-                    })
-                    .catch(err => console.error(err));
-            })
-            .catch(err => console.error(err));
+    const responsePromise = new Promise((resolve, reject) => {
+        caches.open(cacheName).then(cache => {
+            let cacheKey = event.request;
+            cache.match(cacheKey).then(cachedResponse => {
+                if (cachedResponse)
+                    return resolve(cachedResponse);
+                fetch(event.request).then(networkResponse => {
+                    // console.log(`Adding new cache item: '${cacheKey}'`);
+                    cache.put(cacheKey, networkResponse.clone());
+                    return resolve(networkResponse);
+                });
+            });
+        })
+        .catch(err => reject(err));
     });
+
+    event.respondWith(responsePromise);
 });
 
 /*
