@@ -68,6 +68,11 @@ section {
   display: block;
 }
 
+#unavailablecontent {
+  text-align: center;
+  margin: 2.0rem auto 2.0rem auto;
+}
+
 #maincontent {
   background-color: #f3f3f3;
   min-height: 100%;

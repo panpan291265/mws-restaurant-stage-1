@@ -32,32 +32,14 @@
   </header>
 
   <main id="maincontent">
-    <section id="map-container">
-      <div id="map"></div>
-    </section>
-    <section>
-      <div class="filter-options">
-        <h2 tabindex="-1">Filter Results</h2>
-        <div class="filter-select-controls-container">
-          <div class="select-container">
-            <div class="select-label-container">
-              <label for="neighborhoods-select">Neighborhood</label>
-            </div>
-            <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
-              <option value="all">All Neighborhoods</option>
-            </select>
-          </div>
-          <div class="select-container">
-            <div class="select-label-container">
-              <label for="cuisines-select">Cuisine</label>
-            </div>
-            <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
-              <option value="all">All Cuisines</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <ul id="restaurants-list"></ul>
+    <section id="unavailablecontent">
+    <br><br>
+    <h2>The resource you requested is not available.</h2>
+    <br/>
+    <a href="#" onclick="UrlHelper.goToUrl('/')" aria-label="Link to home page">
+      <h3>Back to home page</h3>
+    </a>
+    <br/><br/>
     </section>
   </main>
 
@@ -71,14 +53,9 @@
   </footer>
 
   <script type="text/javascript" src="js/urlhelper.min.js"></script>
-  <script type="text/javascript" src="js/dbhelper.min.js"></script>
-  <script type="text/javascript" src="js/main.min.js"></script>
   <!--
   <script type="text/javascript" src="js/urlhelper.js"></script>
-  <script type="text/javascript" src="js/dbhelper.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
   -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpJfz6j-5RdWrC8Llmv8IbTVwBRxwmi_A&libraries=places&callback=initMap"></script>
 </body>
 
 </html>
