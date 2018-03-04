@@ -39,6 +39,11 @@ gulp.task('copy:images:app', function () {
                 {
                     width: 512,
                     quality: 33,
+                    rename: { suffix: '-512'}
+                },
+                {
+                    width: 720,
+                    quality: 33,
                     rename: { suffix: ''}
                 }
             ]

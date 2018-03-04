@@ -12,12 +12,12 @@
             "sizes": "256x256"
         },
         {
-            "src": "img/restaurant.png",
+            "src": "img/restaurant-512.png",
             "type": "image/png",
             "sizes": "512x512"
         }
     ],
-    "start_url": "/index.html",
+    "start_url": "index.html",
     "scope": "/",
     "display": "standalone",
     "background_color": "#333",
